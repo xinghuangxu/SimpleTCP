@@ -2,6 +2,7 @@ package tcp;
 
 import java.io.BufferedReader;
 import java.io.IOException;
+import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
 import java.net.Socket;
@@ -41,6 +42,9 @@ public class Client implements Runnable{
 				for(Socket s : sockets){
 					OutputStream out=s.getOutputStream();
 					out.write(byteBuffer);
+					InputStream in = s.getInputStream();
+					if(in.read(byteBuffer)!=-1)
+						System.out.println("Message: "+new String(byteBuffer)+" Received");
 				}
 			} catch (IOException e) {
 				// TODO Auto-generated catch block

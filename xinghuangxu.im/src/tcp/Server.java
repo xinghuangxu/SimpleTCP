@@ -40,7 +40,7 @@ public class Server implements Runnable {
 				// return
 				while ((in.read(byteBuffer)) != -1) {
 					out.write(byteBuffer);
-					System.out.print(new String(byteBuffer));
+					System.out.println("New Message: "+new String(byteBuffer));
 				}
 
 				clntSock.close(); // Close the socket. We are done with this
