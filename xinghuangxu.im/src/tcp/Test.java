@@ -30,7 +30,7 @@ public class Test {
 		Thread cThread=new Thread(client);
 		Thread sThread=new Thread(server);
 		
-		cThread.run();
+		//cThread.run();
 		sThread.run();
 		
 

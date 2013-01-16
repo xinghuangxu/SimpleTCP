@@ -41,6 +41,7 @@ public class Server implements Runnable {
 				while ((in.read(byteBuffer)) != -1) {
 					out.write(byteBuffer);
 					System.out.println("New Message: "+new String(byteBuffer));
+					byteBuffer = new byte[BUFSIZE];
 				}
 
 				clntSock.close(); // Close the socket. We are done with this
