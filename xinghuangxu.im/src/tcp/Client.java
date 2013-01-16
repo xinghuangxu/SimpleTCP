@@ -29,24 +29,33 @@ public class Client implements Runnable {
 				System.in));
 		for (;;) {
 
-			for (String server : serverAddrs) {
+			String input;
+			try {
+				while ((input = bufferRead.readLine()) != "") {
+					for (String server : serverAddrs) {
 
-				try {
-					Socket socket = new Socket(server, servPort);
-					// sockets.add(socket);
+						try {
+							Socket socket = new Socket(server, servPort);
+							// sockets.add(socket);
 
-					String input = bufferRead.readLine();
-					byte[] byteBuffer = input.getBytes();
+							//String input = bufferRead.readLine();
+							byte[] byteBuffer = input.getBytes();
 
-					OutputStream out = socket.getOutputStream();
-					out.write(byteBuffer);
-					InputStream in = socket.getInputStream();
-					if (in.read(byteBuffer) != -1)
-						System.out.println("Message: " + new String(byteBuffer)
-								+ " Received");
-				} catch (Exception ex) {
-					System.out.println("Cannot connect with Server: " + server);
+							OutputStream out = socket.getOutputStream();
+							out.write(byteBuffer);
+							InputStream in = socket.getInputStream();
+							if (in.read(byteBuffer) != -1)
+								System.out.println("Message: "
+										+ new String(byteBuffer) + " Received");
+						} catch (Exception ex) {
+							System.out.println("Cannot connect with Server: "
+									+ server);
+						}
+					}
 				}
+			} catch (IOException e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
 			}
 
 		}
